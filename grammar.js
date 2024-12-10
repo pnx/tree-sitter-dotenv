@@ -31,6 +31,8 @@ module.exports = grammar({
     _value: $ => choice(
       $.string,
       $.string_interpolation,
+      $.integer,
+      $.boolean,
       $.value,
       alias($._empty_value, $.value),
     ),
@@ -49,6 +51,10 @@ module.exports = grammar({
 
     string_content: _ => token(/[^']*/),
     string_interpolation_content: _ => token(/[^"]*/),
+
+    integer: _ => token(/(\-)?\d+/),
+    boolean: _ => token(choice('true', 'false')),
+
     value: _ => token(prec(-1, /[^\#\=\s]+/)),
   },
 });

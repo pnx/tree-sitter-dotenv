@@ -18,6 +18,14 @@
         "required": true,
         "types": [
           {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -104,7 +112,15 @@
     "named": false
   },
   {
+    "type": "boolean",
+    "named": true
+  },
+  {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "integer",
     "named": true
   },
   {
