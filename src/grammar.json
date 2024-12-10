@@ -75,7 +75,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "integer"
+          "name": "number"
         },
         {
           "type": "SYMBOL",
@@ -149,12 +149,59 @@
         "value": "[^\"]*"
       }
     },
+    "number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "integer"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "float"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hexadecimal"
+        }
+      ]
+    },
     "integer": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
         "value": "(\\-)?\\d+"
       }
+    },
+    "float": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "(\\-)?\\d+"
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\d+"
+        }
+      ]
+    },
+    "hexadecimal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "0x"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[0-9a-fA-F]+"
+        }
+      ]
     },
     "boolean": {
       "type": "TOKEN",

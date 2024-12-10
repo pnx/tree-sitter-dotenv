@@ -4,7 +4,7 @@
 module.exports = grammar({
   name: "dotenv",
 
-  extras: $ => [
+  extras: _ => [
     /\s/
   ],
 
@@ -31,7 +31,7 @@ module.exports = grammar({
     _value: $ => choice(
       $.string,
       $.string_interpolation,
-      $.integer,
+      $.number,
       $.boolean,
       $.value,
       alias($._empty_value, $.value),
@@ -49,10 +49,23 @@ module.exports = grammar({
       '"',
     ),
 
+    // Strings
+
     string_content: _ => token(/[^']*/),
     string_interpolation_content: _ => token(/[^"]*/),
 
+    // Numbers
+
+    number: $ => choice(
+      $.integer,
+      $.float,
+      $.hexadecimal,
+    ),
+
     integer: _ => token(/(\-)?\d+/),
+    float: _ => seq(/(\-)?\d+/, '.', /\d+/),
+    hexadecimal: _ => seq('0x', /[0-9a-fA-F]+/),
+
     boolean: _ => token(choice('true', 'false')),
 
     value: _ => token(prec(-1, /[^\#\=\s]+/)),
