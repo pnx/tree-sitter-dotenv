@@ -1,0 +1,29 @@
+================================================================================
+String values
+================================================================================
+
+key = "quoted string"
+key = ""
+
+key = 'single quoted string'
+key = ''
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  (identifier)
+  (string_interpolation
+   (string_content)))
+ (assignment
+  (identifier)
+  (string_interpolation
+   (string_content)))
+ (assignment
+  (identifier)
+  (string
+   (string_content)))
+ (assignment
+  (identifier)
+  (string
+   (string_content))))

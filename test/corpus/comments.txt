@@ -1,0 +1,42 @@
+================================================================================
+Comments
+================================================================================
+
+# Comment
+
+#
+# Multi line comment.
+#
+
+EMPTY_WITH_COMMENT=# comment
+EMPTY_WITH_COMMENT_WHITESPACE =      # comment
+
+STRING_VALUE_WITH_COMMENT = 'string'     # comment
+STRING_VALUE_WITH_COMMENT = "string"     # comment
+
+--------------------------------------------------------------------------------
+
+(document
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (assignment 
+    key: (identifier)
+    value: (value))
+  (comment)
+  (assignment 
+   key: (identifier)
+   value: (value))
+  (comment)
+  (assignment 
+   key: (identifier)
+   value: (string
+    (string_content)))
+  (comment)
+  (assignment 
+   key: (identifier)
+   value: (string_interpolation
+       (string_content)))
+  (comment))
+

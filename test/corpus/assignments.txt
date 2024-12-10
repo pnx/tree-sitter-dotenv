@@ -1,0 +1,20 @@
+================================================================================
+Assignments
+================================================================================
+
+EMPTY=
+EMPTY =      
+KEY_WITH_VALUE = value
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  key: (identifier)
+  value: (value))
+ (assignment
+  key: (identifier)
+  value: (value))
+ (assignment
+  key: (identifier)
+  value: (value)))
