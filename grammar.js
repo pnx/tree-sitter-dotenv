@@ -68,6 +68,6 @@ module.exports = grammar({
 
     boolean: _ => token(choice('true', 'false')),
 
-    value: _ => token(prec(-1, /[^\#\=\s]+/)),
+    value: _ => token(prec(-1, /[^\#\s]+/)),
   },
 });
