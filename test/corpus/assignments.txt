@@ -10,11 +10,9 @@ KEY_WITH_VALUE = value
 
 (document
  (assignment
-  key: (identifier)
-  value: (value))
+  key: (identifier))
  (assignment
-  key: (identifier)
-  value: (value))
+  key: (identifier))
  (assignment
   key: (identifier)
   value: (value)))

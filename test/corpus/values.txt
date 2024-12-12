@@ -4,6 +4,7 @@ Number - Integer
 
 INTEGER_VALUE = 1234
 NEGATIVE_INTEGER_VALUE = -1234
+INVALID_INTEGER = 01234
 
 --------------------------------------------------------------------------------
 
@@ -15,8 +16,10 @@ NEGATIVE_INTEGER_VALUE = -1234
  (assignment
   key: (identifier)
   value: (number 
-      (integer))))
-
+      (integer)))
+ (assignment
+  key: (identifier)
+  value: (value)))
 
 ================================================================================
 Number - Float
@@ -42,6 +45,7 @@ Number - Hex
 ================================================================================
 
 HEX = 0xff00ff
+INVALID_HEX = 0xffUUOKJ
 
 --------------------------------------------------------------------------------
 
@@ -49,7 +53,10 @@ HEX = 0xff00ff
  (assignment
   key: (identifier)
   value: (number 
-      (hexadecimal))))
+      (hexadecimal)))
+ (assignment
+  key: (identifier)
+  value: (value)))
 
 ================================================================================
 Boolean

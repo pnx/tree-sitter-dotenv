@@ -3,7 +3,7 @@
 #include "tree_sitter/array.h"
 
 enum TokenType {
-    EMPTY_VALUE,
+    END_OF_ASSIGNMENT,
 };
 
 void *tree_sitter_dotenv_external_scanner_create(void) {
@@ -26,7 +26,7 @@ void advanceWS(TSLexer *lexer) {
 
 bool tree_sitter_dotenv_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
 
-    if (valid_symbols[EMPTY_VALUE]) {
+    if (valid_symbols[END_OF_ASSIGNMENT]) {
         advanceWS(lexer);
 
         if (lexer->lookahead == '\r') {
@@ -36,10 +36,9 @@ bool tree_sitter_dotenv_external_scanner_scan(void *payload, TSLexer *lexer, con
         if (lexer->eof(lexer) 
             || lexer->lookahead == '#'
             || lexer->lookahead == '\n') {
-            lexer->result_symbol = EMPTY_VALUE;
+            lexer->result_symbol = END_OF_ASSIGNMENT;
             return true;
         }
     }
-
     return false;
 }

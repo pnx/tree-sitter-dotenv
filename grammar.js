@@ -4,12 +4,8 @@
 module.exports = grammar({
   name: "dotenv",
 
-  extras: _ => [
-    /\s/
-  ],
-
   externals: $ => [
-    $._empty_value,
+    $._end_of_assignment,
   ],
 
   rules: {
@@ -21,12 +17,13 @@ module.exports = grammar({
     assignment: $ => seq(
       field("key", $.identifier),
       "=",
-      field("value", $._value),
+      optional(field("value", $._value)),
+      $._end_of_assignment,
     ),
 
-    comment: _ => seq('#', /.*/),
+    comment: _ => /\#[^\n]*/,
 
-    identifier: _ => token(/[A-Za-z_][A-Za-z0-9_]*/),
+    identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
 
     _value: $ => choice(
       $.string,
@@ -34,7 +31,6 @@ module.exports = grammar({
       $.number,
       $.boolean,
       $.value,
-      alias($._empty_value, $.value),
     ),
 
     string: $ => seq(
@@ -51,8 +47,8 @@ module.exports = grammar({
 
     // Strings
 
-    string_content: _ => token(/[^']*/),
-    string_interpolation_content: _ => token(/[^"]*/),
+    string_content: _ => /[^']*/,
+    string_interpolation_content: _ => /[^"]*/,
 
     // Numbers
 
@@ -62,12 +58,12 @@ module.exports = grammar({
       $.hexadecimal,
     ),
 
-    integer: _ => token(/(\-)?\d+/),
-    float: _ => seq(/(\-)?\d+/, '.', /\d+/),
-    hexadecimal: _ => seq('0x', /[0-9a-fA-F]+/),
+    integer: _ => /(\-)?[1-9]\d*/,
+    hexadecimal: _ => /0[xX][0-9a-fA-F]+/,
+    float: _ => /(\-)?[1-9]\d*\.\d+/,
 
     boolean: _ => token(choice('true', 'false')),
 
-    value: _ => token(prec(-1, /[^\#\s]+/)),
+    value: _ => /[^\#\s\"\']+/,
   },
 });

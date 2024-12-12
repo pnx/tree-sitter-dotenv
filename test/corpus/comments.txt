@@ -11,7 +11,7 @@ Comments
 EMPTY_WITH_COMMENT=# comment
 EMPTY_WITH_COMMENT_WHITESPACE =      # comment
 
-STRING_VALUE_WITH_COMMENT = 'string'     # comment
+STRING_VALUE_WITH_COMMENT = 'string content'     # comment
 STRING_VALUE_WITH_COMMENT = "string"     # comment
 
 --------------------------------------------------------------------------------
@@ -22,12 +22,10 @@ STRING_VALUE_WITH_COMMENT = "string"     # comment
   (comment)
   (comment)
   (assignment 
-    key: (identifier)
-    value: (value))
+    key: (identifier))
   (comment)
   (assignment 
-   key: (identifier)
-   value: (value))
+   key: (identifier))
   (comment)
   (assignment 
    key: (identifier)
