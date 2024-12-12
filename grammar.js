@@ -28,11 +28,16 @@ module.exports = grammar({
     comment: _ => /\#[^\n]*/,
 
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
+    variable: $ => seq('$', choice(
+      $.identifier,
+      seq('{', $.identifier, '}')
+    )),
 
     _value: $ => choice(
       $.string,
       $.number,
       $.boolean,
+      $.variable,
       $.value,
     ),
 
@@ -51,7 +56,10 @@ module.exports = grammar({
 
     _string: $ => seq(
       '"',
-      optional(alias(/[^"]+/, $.string_content)),
+      optional(repeat(choice(
+        alias(/[^"\$]+/, $.string_content),
+        $.variable
+      ))),
       '"',
     ),
 
@@ -73,6 +81,6 @@ module.exports = grammar({
 
     boolean: _ => token(choice('true', 'false')),
 
-    value: _ => /[^\#\s\"\']+/,
+    value: _ => /[^\#\s\"\'\$]+/,
   },
 });

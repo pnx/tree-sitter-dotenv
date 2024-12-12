@@ -1,0 +1,44 @@
+================================================================================
+Variables
+================================================================================
+
+BASIC = $VARIABLE
+GROUP = ${VARIABLE}
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  key: (identifier)
+  value: (variable
+      (identifier)))
+ (assignment
+  key: (identifier)
+  value: (variable
+      (identifier))))
+
+================================================================================
+Variables in strings
+================================================================================
+
+UNDERSCORE = "$VARIABLE_WITH_UNDERSCORE"
+MULTIPLE = "variable is: ${VARIABLE}, and $ANOTHER !!!"
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  key: (identifier)
+  value: (string
+      (variable
+       (identifier))))
+ (assignment
+  key: (identifier)
+  value: (string
+    (string_content)
+    (variable
+     (identifier))
+    (string_content)
+    (variable
+     (identifier))
+    (string_content))))
