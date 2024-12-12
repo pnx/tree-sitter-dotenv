@@ -1,5 +1,9 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
+//
+const integer_decimal = /(\-)?[1-9]\d*/
+const integer_hexadecimal = /0[xX][0-9a-fA-F]+/
+const float_fractional_part = /\.\d+/
 
 module.exports = grammar({
   name: "dotenv",
@@ -55,12 +59,16 @@ module.exports = grammar({
     number: $ => choice(
       $.integer,
       $.float,
-      $.hexadecimal,
     ),
 
-    integer: _ => /(\-)?[1-9]\d*/,
-    hexadecimal: _ => /0[xX][0-9a-fA-F]+/,
-    float: _ => /(\-)?[1-9]\d*\.\d+/,
+    integer: $ => choice(
+      $.decimal,
+      $.hexadecimal
+    ),
+
+    decimal: _ => integer_decimal,
+    hexadecimal: _ => integer_hexadecimal,
+    float: _ => token(seq(integer_decimal, float_fractional_part)),
 
     boolean: _ => token(choice('true', 'false')),
 

@@ -144,6 +144,15 @@
         {
           "type": "SYMBOL",
           "name": "float"
+        }
+      ]
+    },
+    "integer": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "decimal"
         },
         {
           "type": "SYMBOL",
@@ -151,7 +160,7 @@
         }
       ]
     },
-    "integer": {
+    "decimal": {
       "type": "PATTERN",
       "value": "(\\-)?[1-9]\\d*"
     },
@@ -160,8 +169,20 @@
       "value": "0[xX][0-9a-fA-F]+"
     },
     "float": {
-      "type": "PATTERN",
-      "value": "(\\-)?[1-9]\\d*\\.\\d+"
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "(\\-)?[1-9]\\d*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\.\\d+"
+          }
+        ]
+      }
     },
     "boolean": {
       "type": "TOKEN",

@@ -61,6 +61,25 @@
     }
   },
   {
+    "type": "integer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {},
@@ -70,10 +89,6 @@
       "types": [
         {
           "type": "float",
-          "named": true
-        },
-        {
-          "type": "hexadecimal",
           "named": true
         },
         {
@@ -134,6 +149,10 @@
     "named": true
   },
   {
+    "type": "decimal",
+    "named": true
+  },
+  {
     "type": "float",
     "named": true
   },
@@ -143,10 +162,6 @@
   },
   {
     "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "integer",
     "named": true
   },
   {
