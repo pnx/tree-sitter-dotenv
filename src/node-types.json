@@ -30,10 +30,6 @@
             "named": true
           },
           {
-            "type": "string_interpolation",
-            "named": true
-          },
-          {
             "type": "value",
             "named": true
           }
@@ -100,21 +96,6 @@
   },
   {
     "type": "string",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "string_content",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "string_interpolation",
     "named": true,
     "fields": {},
     "children": {

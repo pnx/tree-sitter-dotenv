@@ -13,11 +13,11 @@ key = ''
 (document
  (assignment
   (identifier)
-  (string_interpolation
+  (string
    (string_content)))
  (assignment
   (identifier)
-  (string_interpolation
+  (string
    (string_content)))
  (assignment
   (identifier)

@@ -34,7 +34,7 @@ STRING_VALUE_WITH_COMMENT = "string"     # comment
   (comment)
   (assignment 
    key: (identifier)
-   value: (string_interpolation
+   value: (string
        (string_content)))
   (comment))
 

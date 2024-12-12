@@ -31,28 +31,29 @@ module.exports = grammar({
 
     _value: $ => choice(
       $.string,
-      $.string_interpolation,
       $.number,
       $.boolean,
       $.value,
     ),
 
-    string: $ => seq(
-      "'",
-      $.string_content,
-      "'",
-    ),
-
-    string_interpolation: $ => seq(
-      '"',
-      alias($.string_interpolation_content, $.string_content),
-      '"',
-    ),
-
     // Strings
 
-    string_content: _ => /[^']*/,
-    string_interpolation_content: _ => /[^"]*/,
+    string: $ => choice(
+      $._string,
+      $._literal_string
+    ),
+
+    _literal_string: $ => seq(
+      "'",
+      alias(/[^']*/, $.string_content),
+      "'",
+    ),
+
+    _string: $ => seq(
+      '"',
+      alias(/[^"]*/, $.string_content),
+      '"',
+    ),
 
     // Numbers
 

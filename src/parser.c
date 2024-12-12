@@ -5,9 +5,9 @@
 #endif
 
 #define LANGUAGE_VERSION 14
-#define STATE_COUNT 18
+#define STATE_COUNT 19
 #define LARGE_STATE_COUNT 3
-#define SYMBOL_COUNT 22
+#define SYMBOL_COUNT 23
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 14
 #define EXTERNAL_TOKEN_COUNT 1
@@ -20,9 +20,9 @@ enum ts_symbol_identifiers {
   sym_comment = 2,
   sym_identifier = 3,
   anon_sym_SQUOTE = 4,
-  anon_sym_DQUOTE = 5,
-  sym_string_content = 6,
-  sym_string_interpolation_content = 7,
+  aux_sym__literal_string_token1 = 5,
+  anon_sym_DQUOTE = 6,
+  aux_sym__string_token1 = 7,
   sym_decimal = 8,
   sym_hexadecimal = 9,
   sym_float = 10,
@@ -33,10 +33,11 @@ enum ts_symbol_identifiers {
   sym_assignment = 15,
   sym__value = 16,
   sym_string = 17,
-  sym_string_interpolation = 18,
-  sym_number = 19,
-  sym_integer = 20,
-  aux_sym_document_repeat1 = 21,
+  sym__literal_string = 18,
+  sym__string = 19,
+  sym_number = 20,
+  sym_integer = 21,
+  aux_sym_document_repeat1 = 22,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -45,9 +46,9 @@ static const char * const ts_symbol_names[] = {
   [sym_comment] = "comment",
   [sym_identifier] = "identifier",
   [anon_sym_SQUOTE] = "'",
+  [aux_sym__literal_string_token1] = "string_content",
   [anon_sym_DQUOTE] = "\"",
-  [sym_string_content] = "string_content",
-  [sym_string_interpolation_content] = "string_content",
+  [aux_sym__string_token1] = "string_content",
   [sym_decimal] = "decimal",
   [sym_hexadecimal] = "hexadecimal",
   [sym_float] = "float",
@@ -58,7 +59,8 @@ static const char * const ts_symbol_names[] = {
   [sym_assignment] = "assignment",
   [sym__value] = "_value",
   [sym_string] = "string",
-  [sym_string_interpolation] = "string_interpolation",
+  [sym__literal_string] = "_literal_string",
+  [sym__string] = "_string",
   [sym_number] = "number",
   [sym_integer] = "integer",
   [aux_sym_document_repeat1] = "document_repeat1",
@@ -70,9 +72,9 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_comment] = sym_comment,
   [sym_identifier] = sym_identifier,
   [anon_sym_SQUOTE] = anon_sym_SQUOTE,
+  [aux_sym__literal_string_token1] = aux_sym__literal_string_token1,
   [anon_sym_DQUOTE] = anon_sym_DQUOTE,
-  [sym_string_content] = sym_string_content,
-  [sym_string_interpolation_content] = sym_string_content,
+  [aux_sym__string_token1] = aux_sym__literal_string_token1,
   [sym_decimal] = sym_decimal,
   [sym_hexadecimal] = sym_hexadecimal,
   [sym_float] = sym_float,
@@ -83,7 +85,8 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_assignment] = sym_assignment,
   [sym__value] = sym__value,
   [sym_string] = sym_string,
-  [sym_string_interpolation] = sym_string_interpolation,
+  [sym__literal_string] = sym__literal_string,
+  [sym__string] = sym__string,
   [sym_number] = sym_number,
   [sym_integer] = sym_integer,
   [aux_sym_document_repeat1] = aux_sym_document_repeat1,
@@ -110,15 +113,15 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
+  [aux_sym__literal_string_token1] = {
+    .visible = true,
+    .named = true,
+  },
   [anon_sym_DQUOTE] = {
     .visible = true,
     .named = false,
   },
-  [sym_string_content] = {
-    .visible = true,
-    .named = true,
-  },
-  [sym_string_interpolation_content] = {
+  [aux_sym__string_token1] = {
     .visible = true,
     .named = true,
   },
@@ -162,8 +165,12 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [sym_string_interpolation] = {
-    .visible = true,
+  [sym__literal_string] = {
+    .visible = false,
+    .named = true,
+  },
+  [sym__string] = {
+    .visible = false,
     .named = true,
   },
   [sym_number] = {
@@ -231,6 +238,7 @@ static const TSStateId ts_primary_state_ids[STATE_COUNT] = {
   [15] = 15,
   [16] = 16,
   [17] = 17,
+  [18] = 18,
 };
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -240,7 +248,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 0:
       if (eof) ADVANCE(7);
       ADVANCE_MAP(
-        '"', 18,
+        '"', 20,
         '#', 9,
         '\'', 17,
         '-', 3,
@@ -257,7 +265,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(16);
       END_STATE();
     case 1:
-      if (lookahead == '"') ADVANCE(18);
+      if (lookahead == '"') ADVANCE(20);
       if (lookahead == '\'') ADVANCE(17);
       if (lookahead == '-') ADVANCE(37);
       if (lookahead == '0') ADVANCE(36);
@@ -364,29 +372,29 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_SQUOTE);
       END_STATE();
     case 18:
-      ACCEPT_TOKEN(anon_sym_DQUOTE);
+      ACCEPT_TOKEN(aux_sym__literal_string_token1);
+      if (('\t' <= lookahead && lookahead <= '\r') ||
+          lookahead == ' ') ADVANCE(18);
+      if (lookahead != 0 &&
+          lookahead != '\'') ADVANCE(19);
       END_STATE();
     case 19:
-      ACCEPT_TOKEN(sym_string_content);
-      if (('\t' <= lookahead && lookahead <= '\r') ||
-          lookahead == ' ') ADVANCE(19);
+      ACCEPT_TOKEN(aux_sym__literal_string_token1);
       if (lookahead != 0 &&
-          lookahead != '\'') ADVANCE(20);
+          lookahead != '\'') ADVANCE(19);
       END_STATE();
     case 20:
-      ACCEPT_TOKEN(sym_string_content);
-      if (lookahead != 0 &&
-          lookahead != '\'') ADVANCE(20);
+      ACCEPT_TOKEN(anon_sym_DQUOTE);
       END_STATE();
     case 21:
-      ACCEPT_TOKEN(sym_string_interpolation_content);
+      ACCEPT_TOKEN(aux_sym__string_token1);
       if (('\t' <= lookahead && lookahead <= '\r') ||
           lookahead == ' ') ADVANCE(21);
       if (lookahead != 0 &&
           lookahead != '"') ADVANCE(22);
       END_STATE();
     case 22:
-      ACCEPT_TOKEN(sym_string_interpolation_content);
+      ACCEPT_TOKEN(aux_sym__string_token1);
       if (lookahead != 0 &&
           lookahead != '"') ADVANCE(22);
       END_STATE();
@@ -574,15 +582,16 @@ static const TSLexMode ts_lex_modes[STATE_COUNT] = {
   [6] = {.lex_state = 6},
   [7] = {.lex_state = 0},
   [8] = {.lex_state = 0},
-  [9] = {.lex_state = 19},
+  [9] = {.lex_state = 18},
   [10] = {.lex_state = 21},
   [11] = {.lex_state = 0, .external_lex_state = 1},
   [12] = {.lex_state = 0, .external_lex_state = 1},
   [13] = {.lex_state = 0, .external_lex_state = 1},
-  [14] = {.lex_state = 0},
+  [14] = {.lex_state = 0, .external_lex_state = 1},
   [15] = {.lex_state = 0},
-  [16] = {.lex_state = 0, .external_lex_state = 1},
+  [16] = {.lex_state = 0},
   [17] = {.lex_state = 0, .external_lex_state = 1},
+  [18] = {.lex_state = 0, .external_lex_state = 1},
 };
 
 static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
@@ -610,7 +619,8 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
   [2] = {
     [sym__value] = STATE(13),
     [sym_string] = STATE(13),
-    [sym_string_interpolation] = STATE(13),
+    [sym__literal_string] = STATE(14),
+    [sym__string] = STATE(14),
     [sym_number] = STATE(13),
     [sym_integer] = STATE(12),
     [anon_sym_SQUOTE] = ACTIONS(9),
@@ -663,10 +673,10 @@ static const uint16_t ts_small_parse_table[] = {
       ts_builtin_sym_end,
   [48] = 1,
     ACTIONS(41), 1,
-      sym_string_content,
+      aux_sym__literal_string_token1,
   [52] = 1,
     ACTIONS(43), 1,
-      sym_string_interpolation_content,
+      aux_sym__string_token1,
   [56] = 1,
     ACTIONS(45), 1,
       sym__end_of_assignment,
@@ -678,15 +688,18 @@ static const uint16_t ts_small_parse_table[] = {
       sym__end_of_assignment,
   [68] = 1,
     ACTIONS(51), 1,
-      anon_sym_SQUOTE,
+      sym__end_of_assignment,
   [72] = 1,
     ACTIONS(53), 1,
-      anon_sym_DQUOTE,
+      anon_sym_SQUOTE,
   [76] = 1,
     ACTIONS(55), 1,
-      sym__end_of_assignment,
+      anon_sym_DQUOTE,
   [80] = 1,
     ACTIONS(57), 1,
+      sym__end_of_assignment,
+  [84] = 1,
+    ACTIONS(59), 1,
       sym__end_of_assignment,
 };
 
@@ -706,6 +719,7 @@ static const uint32_t ts_small_parse_table_map[] = {
   [SMALL_STATE(15)] = 72,
   [SMALL_STATE(16)] = 76,
   [SMALL_STATE(17)] = 80,
+  [SMALL_STATE(18)] = 84,
 };
 
 static const TSParseActionEntry ts_parse_actions[] = {
@@ -729,15 +743,16 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [35] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_assignment, 4, 0, 2),
   [37] = {.entry = {.count = 1, .reusable = true}}, SHIFT(2),
   [39] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
-  [41] = {.entry = {.count = 1, .reusable = true}}, SHIFT(14),
-  [43] = {.entry = {.count = 1, .reusable = true}}, SHIFT(15),
+  [41] = {.entry = {.count = 1, .reusable = true}}, SHIFT(15),
+  [43] = {.entry = {.count = 1, .reusable = true}}, SHIFT(16),
   [45] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_integer, 1, 0, 0),
   [47] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_number, 1, 0, 0),
   [49] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
-  [51] = {.entry = {.count = 1, .reusable = true}}, SHIFT(16),
+  [51] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_string, 1, 0, 0),
   [53] = {.entry = {.count = 1, .reusable = true}}, SHIFT(17),
-  [55] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_string, 3, 0, 0),
-  [57] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_string_interpolation, 3, 0, 0),
+  [55] = {.entry = {.count = 1, .reusable = true}}, SHIFT(18),
+  [57] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__literal_string, 3, 0, 0),
+  [59] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__string, 3, 0, 0),
 };
 
 enum ts_external_scanner_symbol_identifiers {

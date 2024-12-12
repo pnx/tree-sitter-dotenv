@@ -71,10 +71,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_interpolation"
-        },
-        {
-          "type": "SYMBOL",
           "name": "number"
         },
         {
@@ -88,6 +84,19 @@
       ]
     },
     "string": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_literal_string"
+        }
+      ]
+    },
+    "_literal_string": {
       "type": "SEQ",
       "members": [
         {
@@ -95,8 +104,13 @@
           "value": "'"
         },
         {
-          "type": "SYMBOL",
-          "name": "string_content"
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^']*"
+          },
+          "named": true,
+          "value": "string_content"
         },
         {
           "type": "STRING",
@@ -104,7 +118,7 @@
         }
       ]
     },
-    "string_interpolation": {
+    "_string": {
       "type": "SEQ",
       "members": [
         {
@@ -114,8 +128,8 @@
         {
           "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "string_interpolation_content"
+            "type": "PATTERN",
+            "value": "[^\"]*"
           },
           "named": true,
           "value": "string_content"
@@ -125,14 +139,6 @@
           "value": "\""
         }
       ]
-    },
-    "string_content": {
-      "type": "PATTERN",
-      "value": "[^']*"
-    },
-    "string_interpolation_content": {
-      "type": "PATTERN",
-      "value": "[^\"]*"
     },
     "number": {
       "type": "CHOICE",
