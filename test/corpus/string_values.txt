@@ -17,13 +17,11 @@ key = ''
    (string_content)))
  (assignment
   (identifier)
-  (string
-   (string_content)))
+  (string))
  (assignment
   (identifier)
   (string
    (string_content)))
  (assignment
   (identifier)
-  (string
-   (string_content))))
+  (string)))

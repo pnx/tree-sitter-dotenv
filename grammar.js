@@ -45,13 +45,13 @@ module.exports = grammar({
 
     _literal_string: $ => seq(
       "'",
-      alias(/[^']*/, $.string_content),
+      optional(alias(/[^']+/, $.string_content)),
       "'",
     ),
 
     _string: $ => seq(
       '"',
-      alias(/[^"]*/, $.string_content),
+      optional(alias(/[^"]+/, $.string_content)),
       '"',
     ),
 
