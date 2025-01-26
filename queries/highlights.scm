@@ -4,3 +4,4 @@
 (string) @string
 [(identifier) (variable)] @variable
 (value) @string
+(comment) @comment
