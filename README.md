@@ -27,7 +27,7 @@ config = function(_, opts)
     -- Associate .env files as "dotenv"
     vim.filetype.add({
         pattern = {
-            ['.env.*'] = 'dotenv',
+            ['%.env.*'] = 'dotenv',
         },
     })
 end
