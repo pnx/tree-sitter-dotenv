@@ -1,11 +1,12 @@
 # Rust artifacts
 target/
+Cargo.lock
 
 # Node artifacts
 build/
 prebuilds/
 node_modules/
-*.tgz
+package-lock.json
 
 # Swift artifacts
 .build/
@@ -27,6 +28,13 @@ dist/
 *.dylib
 *.dll
 *.pc
+*.exp
+*.lib
+
+# Zig artifacts
+.zig-cache/
+zig-cache/
+zig-out/
 
 # Example dirs
 /examples/*/
@@ -35,3 +43,8 @@ dist/
 *.wasm
 *.obj
 *.o
+
+# Archives
+*.tar.gz
+*.tgz
+*.zip
