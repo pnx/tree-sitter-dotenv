@@ -10,7 +10,8 @@
         "dotenv"
       ],
       "injection-regex": "^dotenv$",
-      "class-name": "TreeSitterDotenv"
+      "class-name": "TreeSitterDotenv",
+      "highlights": "queries/highlights.scm"
     }
   ],
   "metadata": {
