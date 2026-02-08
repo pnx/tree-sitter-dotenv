@@ -18,7 +18,7 @@ unsigned tree_sitter_dotenv_external_scanner_serialize(void *payload, char *buff
 
 void tree_sitter_dotenv_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {}
 
-void advanceWS(TSLexer *lexer) {
+void static advanceWS(TSLexer *lexer) {
     while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
         lexer->advance(lexer, true);
     }
