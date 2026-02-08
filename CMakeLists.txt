@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-dotenv
-        VERSION "0.0.4"
+        VERSION "0.0.5"
         DESCRIPTION "Dotenv grammar for tree-sitter"
         HOMEPAGE_URL "https://github.com/pnx/tree-sitter-dotenv"
         LANGUAGES C)

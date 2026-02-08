@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-dotenv",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "Dotenv grammar for tree-sitter",
   "repository": "github:pnx/tree-sitter-dotenv",
   "license": "MIT",
