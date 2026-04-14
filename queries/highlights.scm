@@ -1,16 +1,16 @@
 "=" @operator
 
+(comment) @comment
 (boolean) @constant
-
 (number) @number
 
-(string) @string
+[
+ (string)
+ (value)
+] @string
 
 [
   (identifier)
   (variable)
 ] @variable
 
-(value) @string
-
-(comment) @comment
