@@ -2,6 +2,8 @@
 
 (comment) @comment
 
+(export) @keyword
+
 (boolean) @constant
 
 (number) @number

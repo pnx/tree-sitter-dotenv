@@ -39,6 +39,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "export",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -159,6 +169,10 @@
   },
   {
     "type": "decimal",
+    "named": true
+  },
+  {
+    "type": "export",
     "named": true
   },
   {

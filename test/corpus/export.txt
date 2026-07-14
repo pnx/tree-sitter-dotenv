@@ -1,0 +1,56 @@
+================================================================================
+Export keyword
+================================================================================
+
+export VAR=one
+export  VAR  = one
+export	TAB=two
+export export=var
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  (export)
+  (identifier)
+  (value))
+ (assignment
+  (export)
+  (identifier)
+  (value))
+ (assignment
+  (export)
+  (identifier)
+  (value))
+ (assignment
+  (export)
+  (identifier)
+  (value))
+)
+
+================================================================================
+Export-like identifiers
+================================================================================
+
+export=one
+export = one
+exportVAR=two
+exportVAR = two
+
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  key: (identifier)
+  value: (value))
+ (assignment
+  key: (identifier)
+  value: (value))
+ (assignment
+  key: (identifier)
+  value: (value))
+ (assignment
+  key: (identifier)
+  value: (value))
+)
