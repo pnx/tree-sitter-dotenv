@@ -4,6 +4,9 @@
 
 To use this parser in neovim, configure [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 
+For minimal, ready-to-run local test configs (both `main` and legacy `master`), see
+[test/nvim/README.md](../test/nvim/README.md).
+
 ### nvim-treesitter `main` (new API)
 
 Use this if you are on the rewritten `main` branch (Neovim 0.12+):
