@@ -5,8 +5,8 @@ legacy and rewritten `nvim-treesitter`.
 
 ## Files
 
-- `init-main.lua` → `nvim-treesitter` `main` (new API)
-- `init-master.lua` → `nvim-treesitter` `master` (legacy API)
+- [`init-main.lua`](./init-main.lua) → `nvim-treesitter` `main` (new API)
+- [`init-master.lua`](./init-master.lua) → `nvim-treesitter` `master` (legacy API)
 
 ## Run
 
