@@ -24,17 +24,17 @@ module.exports = grammar({
       seq(
         field("key", choice(
           $.identifier,
-          alias($.export, $.identifier),
+          alias("export", $.identifier),
         )),
         "=",
         optional(field("value", $._value)),
         $._end_of_assignment,
       ),
       prec(1, seq(
-        $.export,
+        "export",
         field("key", choice(
           $.identifier,
-          alias($.export, $.identifier),
+          alias("export", $.identifier),
         )),
         "=",
         optional(field("value", $._value)),
@@ -43,7 +43,6 @@ module.exports = grammar({
     ),
 
     comment: _ => /\#[^\n]*/,
-    export: _ => token(prec(1, 'export')),
 
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
     variable: $ => seq('$', choice(

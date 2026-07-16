@@ -39,16 +39,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "export",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -173,7 +163,7 @@
   },
   {
     "type": "export",
-    "named": true
+    "named": false
   },
   {
     "type": "float",

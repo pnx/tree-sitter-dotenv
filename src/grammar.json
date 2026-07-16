@@ -38,8 +38,8 @@
                   {
                     "type": "ALIAS",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "export"
+                      "type": "STRING",
+                      "value": "export"
                     },
                     "named": true,
                     "value": "identifier"
@@ -80,8 +80,8 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "export"
+                "type": "STRING",
+                "value": "export"
               },
               {
                 "type": "FIELD",
@@ -96,8 +96,8 @@
                     {
                       "type": "ALIAS",
                       "content": {
-                        "type": "SYMBOL",
-                        "name": "export"
+                        "type": "STRING",
+                        "value": "export"
                       },
                       "named": true,
                       "value": "identifier"
@@ -137,17 +137,6 @@
     "comment": {
       "type": "PATTERN",
       "value": "\\#[^\\n]*"
-    },
-    "export": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "STRING",
-          "value": "export"
-        }
-      }
     },
     "identifier": {
       "type": "PATTERN",

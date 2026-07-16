@@ -1,5 +1,6 @@
 ================================================================================
 Export keyword
+:cst
 ================================================================================
 
 export VAR=one
@@ -9,27 +10,31 @@ export export=var
 
 --------------------------------------------------------------------------------
 
-(document
- (assignment
-  (export)
-  (identifier)
-  (value))
- (assignment
-  (export)
-  (identifier)
-  (value))
- (assignment
-  (export)
-  (identifier)
-  (value))
- (assignment
-  (export)
-  (identifier)
-  (value))
-)
+1:0  - 5:0    document
+1:0  - 1:14     assignment
+1:0  - 1:6        "export"
+1:7  - 1:10       key: identifier `VAR`
+1:10 - 1:11       "="
+1:11 - 1:14       value: value `one`
+2:0  - 2:18     assignment
+2:0  - 2:6        "export"
+2:8  - 2:11       key: identifier `VAR`
+2:13 - 2:14       "="
+2:15 - 2:18       value: value `one`
+3:0  - 3:14     assignment
+3:0  - 3:6        "export"
+3:7  - 3:10       key: identifier `TAB`
+3:10 - 3:11       "="
+3:11 - 3:14       value: value `two`
+4:0  - 4:17     assignment
+4:0  - 4:6        "export"
+4:7  - 4:13       key: identifier `export`
+4:13 - 4:14       "="
+4:14 - 4:17       value: value `var`
 
 ================================================================================
 Export-like identifiers
+:cst
 ================================================================================
 
 export=one
@@ -40,17 +45,20 @@ exportVAR = two
 
 --------------------------------------------------------------------------------
 
-(document
- (assignment
-  key: (identifier)
-  value: (value))
- (assignment
-  key: (identifier)
-  value: (value))
- (assignment
-  key: (identifier)
-  value: (value))
- (assignment
-  key: (identifier)
-  value: (value))
-)
+1:0  - 6:0    document
+1:0  - 1:10     assignment
+1:0  - 1:6        key: identifier `export`
+1:6  - 1:7        "="
+1:7  - 1:10       value: value `one`
+2:0  - 2:12     assignment
+2:0  - 2:6        key: identifier `export`
+2:7  - 2:8        "="
+2:9  - 2:12       value: value `one`
+3:0  - 3:13     assignment
+3:0  - 3:9        key: identifier `exportVAR`
+3:9  - 3:10       "="
+3:10 - 3:13       value: value `two`
+4:0  - 4:15     assignment
+4:0  - 4:9        key: identifier `exportVAR`
+4:10 - 4:11       "="
+4:12 - 4:15       value: value `two`

@@ -1,8 +1,8 @@
 "=" @operator
 
-(comment) @comment
+"export" @keyword
 
-(export) @keyword
+(comment) @comment
 
 (boolean) @constant
 
