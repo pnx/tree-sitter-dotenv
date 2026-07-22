@@ -62,8 +62,11 @@ module.exports = grammar({
 
     string: $ => choice(
       $._string,
-      $._literal_string
+      $._literal_string,
+      $._unquoted_string,
     ),
+
+    _unquoted_string: $ => alias(/[^\#\s\"\'\$]+(?:[ \t]+[^\#\s\"\'\$]+)+/, $.string_content),
 
     _literal_string: $ => seq(
       "'",

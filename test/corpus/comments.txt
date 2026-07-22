@@ -13,6 +13,8 @@ EMPTY_WITH_COMMENT_WHITESPACE =      # comment
 
 STRING_VALUE_WITH_COMMENT = 'string content'     # comment
 STRING_VALUE_WITH_COMMENT = "string"     # comment
+STRING_MULTIWORD_WITH_COMMENT = one   two   three      # comment
+SINGLE_WORD_WITH_COMMENT = singleword     # comment
 
 --------------------------------------------------------------------------------
 
@@ -35,6 +37,14 @@ STRING_VALUE_WITH_COMMENT = "string"     # comment
   (assignment 
    key: (identifier)
    value: (string
-       (string_content)))
+        (string_content)))
+  (comment)
+  (assignment 
+   key: (identifier)
+   value: (string
+        (string_content)))
+  (comment)
+  (assignment 
+   key: (identifier)
+   value: (value))
   (comment))
-

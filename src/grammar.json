@@ -212,8 +212,21 @@
         {
           "type": "SYMBOL",
           "name": "_literal_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_unquoted_string"
         }
       ]
+    },
+    "_unquoted_string": {
+      "type": "ALIAS",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\#\\s\\\"\\'\\$]+(?:[ \\t]+[^\\#\\s\\\"\\'\\$]+)+"
+      },
+      "named": true,
+      "value": "string_content"
     },
     "_literal_string": {
       "type": "SEQ",
