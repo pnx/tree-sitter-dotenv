@@ -1,0 +1,161 @@
+================================================================================
+Boolean prefixes become string content
+================================================================================
+
+PLAIN_TRUE=true
+TRUE_PREFIX=true${APP_NAME}
+PLAIN_FALSE=false
+FALSE_PREFIX=false${APP_NAME}
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  (identifier)
+  (boolean))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))))
+ (assignment
+  (identifier)
+  (boolean))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier)))))
+
+================================================================================
+Numeric prefixes become string content
+================================================================================
+
+PLAIN_INTEGER=123
+INTEGER_PREFIX=123${APP_NAME}
+PLAIN_NEGATIVE=-123
+NEGATIVE_PREFIX=-123${APP_NAME}
+PLAIN_HEX=0xFF
+HEX_PREFIX=0xFF${APP_NAME}
+PLAIN_FLOAT=1.5
+FLOAT_PREFIX=1.5${APP_NAME}
+PLAIN_NEGATIVE_FLOAT=-1.5
+NEGATIVE_FLOAT_PREFIX=-1.5${APP_NAME}
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  (identifier)
+  (number (integer (decimal))))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))))
+ (assignment
+  (identifier)
+  (number (integer (decimal))))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))))
+ (assignment
+  (identifier)
+  (number (integer (hexadecimal))))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))))
+ (assignment
+  (identifier)
+  (number (float)))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))))
+ (assignment
+  (identifier)
+  (number (float)))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier)))))
+
+================================================================================
+Scalar prefixes with suffixes and comments
+================================================================================
+
+BOOL=true${APP_NAME}-suffix # comment
+NUMBER=123${APP_NAME} suffix words
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))
+   (string_content)))
+ (comment)
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))
+   (string_content))))
+
+================================================================================
+Bare boolean-prefixed references are literal strings
+================================================================================
+
+BOOL=true$APP_NAME
+BOOL=false$APP_NAME
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content))))
+
+================================================================================
+Bare decimal-prefixed references are literal strings
+================================================================================
+
+NUMBER=123$APP_NAME
+NUMBER=-123$APP_NAME
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content))))
+
+================================================================================
+Bare hexadecimal-prefixed references are literal strings
+================================================================================
+
+HEX=0xFF$APP_NAME
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment (identifier) (string (string_content))))
+
+================================================================================
+Bare float-prefixed references are literal strings
+================================================================================
+
+FLOAT=1.5$APP_NAME
+FLOAT=-1.5$APP_NAME
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content))))
