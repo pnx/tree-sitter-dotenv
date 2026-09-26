@@ -42,3 +42,85 @@ MULTIPLE = "variable is: ${VARIABLE}, and $ANOTHER !!!"
     (variable
      (identifier))
     (string_content))))
+
+================================================================================
+Unquoted braced variables with prefixes
+================================================================================
+
+BASIC = prefix${VARIABLE}
+VITE_APP_NAME=xxx${APP_NAME}
+SUFFIX = prefix${VARIABLE}-suffix
+MULTIWORD = prefix words${VARIABLE} suffix words # comment
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  key: (identifier)
+  value: (string
+   (string_content)
+   (variable
+    (identifier))))
+ (assignment
+  key: (identifier)
+  value: (string
+   (string_content)
+   (variable
+    (identifier))))
+ (assignment
+  key: (identifier)
+  value: (string
+   (string_content)
+   (variable
+    (identifier))
+   (string_content)))
+ (assignment
+  key: (identifier)
+  value: (string
+   (string_content)
+   (variable
+    (identifier))
+   (string_content)))
+ (comment))
+
+================================================================================
+Unquoted bare references with prefixes are literal strings
+================================================================================
+
+VITE_APP_NAME=xxx$APP_NAME
+NAME=XXX$APP_NAME
+SUFFIX=xxx$APP_NAME-suffix
+MULTIPLE=xxx$APP_NAME$OTHER
+MULTIWORD=prefix words$APP_NAME suffix words # comment
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content)))
+ (assignment (identifier) (string (string_content)))
+ (comment))
+
+================================================================================
+Literal bare references alongside braced interpolation
+================================================================================
+
+PREFIX=xxx$LITERAL${APP_NAME}
+SUFFIX=xxx${APP_NAME}suffix$LITERAL
+
+--------------------------------------------------------------------------------
+
+(document
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))))
+ (assignment
+  (identifier)
+  (string
+   (string_content)
+   (variable (identifier))
+   (string_content))))

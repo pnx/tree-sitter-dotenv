@@ -143,6 +143,28 @@
       "value": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "variable": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "$"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_braced_variable"
+        }
+      ]
+    },
+    "_braced_variable": {
       "type": "SEQ",
       "members": [
         {
@@ -150,30 +172,16 @@
           "value": "$"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "{"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "identifier"
-                },
-                {
-                  "type": "STRING",
-                  "value": "}"
-                }
-              ]
-            }
-          ]
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
         }
       ]
     },
@@ -220,13 +228,167 @@
       ]
     },
     "_unquoted_string": {
-      "type": "ALIAS",
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_unquoted_content"
+          },
+          "named": true,
+          "value": "string_content"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "value"
+                  },
+                  "named": true,
+                  "value": "string_content"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "boolean"
+                  },
+                  "named": true,
+                  "value": "string_content"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "decimal"
+                  },
+                  "named": true,
+                  "value": "string_content"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "hexadecimal"
+                  },
+                  "named": true,
+                  "value": "string_content"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "float"
+                  },
+                  "named": true,
+                  "value": "string_content"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_unquoted_content"
+                  },
+                  "named": true,
+                  "value": "string_content"
+                }
+              ]
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_braced_variable"
+              },
+              "named": true,
+              "value": "variable"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "value"
+                      },
+                      "named": true,
+                      "value": "string_content"
+                    },
+                    {
+                      "type": "ALIAS",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "_unquoted_content"
+                      },
+                      "named": true,
+                      "value": "string_content"
+                    }
+                  ]
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "_unquoted_content": {
+      "type": "TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "[^\\#\\s\\\"\\'\\$]+(?:[ \\t]+[^\\#\\s\\\"\\'\\$]+)+"
-      },
-      "named": true,
-      "value": "string_content"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "[^\\#\\s\\\"\\'\\$]+(?:[ \\t]+[^\\#\\s\\\"\\'\\$]+)+"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^\\#\\s\\\"\\'\\$]+(?:[ \\t]+[^\\#\\s\\\"\\'\\$]+)*"
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "\\$[A-Za-z_][A-Za-z0-9_]*"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "PATTERN",
+                          "value": "(?:[ \\t]*[^\\#\\s\\\"\\'\\$]+)+"
+                        },
+                        {
+                          "type": "BLANK"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
     },
     "_literal_string": {
       "type": "SEQ",
