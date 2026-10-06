@@ -45,10 +45,12 @@ module.exports = grammar({
     comment: _ => /\#[^\n]*/,
 
     identifier: _ => /[A-Za-z_][A-Za-z0-9_]*/,
-    variable: $ => seq('$', choice(
-      $.identifier,
-      seq('{', $.identifier, '}')
-    )),
+    variable: $ => choice(
+      seq('$', $.identifier),
+      $._braced_variable,
+    ),
+
+    _braced_variable: $ => seq('$', '{', $.identifier, '}'),
 
     _value: $ => choice(
       $.string,
@@ -66,7 +68,35 @@ module.exports = grammar({
       $._unquoted_string,
     ),
 
-    _unquoted_string: $ => alias(/[^\#\s\"\'\$]+(?:[ \t]+[^\#\s\"\'\$]+)+/, $.string_content),
+    _unquoted_string: $ => choice(
+      alias($._unquoted_content, $.string_content),
+      seq(
+        choice(
+          alias($.value, $.string_content),
+          alias($.boolean, $.string_content),
+          alias($.decimal, $.string_content),
+          alias($.hexadecimal, $.string_content),
+          alias($.float, $.string_content),
+          alias($._unquoted_content, $.string_content),
+        ),
+        alias($._braced_variable, $.variable),
+        optional(choice(
+          alias($.value, $.string_content),
+          alias($._unquoted_content, $.string_content),
+        )),
+      ),
+    ),
+
+    _unquoted_content: _ => token(choice(
+      /[^\#\s\"\'\$]+(?:[ \t]+[^\#\s\"\'\$]+)+/,
+      seq(
+        /[^\#\s\"\'\$]+(?:[ \t]+[^\#\s\"\'\$]+)*/,
+        repeat1(seq(
+          /\$[A-Za-z_][A-Za-z0-9_]*/,
+          optional(/(?:[ \t]*[^\#\s\"\'\$]+)+/),
+        )),
+      ),
+    )),
 
     _literal_string: $ => seq(
       "'",
