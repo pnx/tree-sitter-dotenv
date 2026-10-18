@@ -2,7 +2,7 @@ ifeq ($(OS),Windows_NT)
 $(error Windows is not supported)
 endif
 
-VERSION := 1.1.2
+VERSION := 1.1.3
 
 LANGUAGE_NAME := tree-sitter-dotenv
 
